@@ -7,6 +7,7 @@
 #include <string>
 #include <string.h>
 #include <msclr/marshal_cppstd.h>
+#include "orden.h"
 namespace Laboratoio5 {
 
 	using namespace System;
@@ -18,6 +19,7 @@ namespace Laboratoio5 {
 
 	//variables globales a utilizar
 	pokemon pokedex[80];
+	orden ordenamiento;
 
 	/// <summary>
 	/// Resumen de MyForm
@@ -197,6 +199,7 @@ namespace Laboratoio5 {
 			this->pictureBox8->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox8->TabIndex = 8;
 			this->pictureBox8->TabStop = false;
+			this->pictureBox8->Click += gcnew System::EventHandler(this, &MyForm::pictureBox8_Click);
 			// 
 			// label2
 			// 
@@ -249,6 +252,7 @@ namespace Laboratoio5 {
 private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) 
 {
 	leerArchivo();
+	textBox1->Text = mostrar(pokedex, 0);
 }
 	   void leerArchivo()
 	   {
@@ -290,6 +294,23 @@ private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e)
 	   }
 private: System::Void pictureBox3_Click(System::Object^ sender, System::EventArgs^ e) 
 {
+	ordenamiento.selectionSortGen(pokedex, 80);
+	textBox1->Text = mostrar(pokedex, 0);
+}
+	   //metodo para mostrar en pantalla la lista
+	   System::String^ mostrar(pokemon lista[], int n)
+	   {
+		   //condicion de salida
+		   if (n == 79)
+		   {
+			   return Convert::ToString(lista[n].numero) + "," + gcnew String(lista[n].nombre.data()) + ", " + Convert::ToString(lista[n].gen);
+		   }
+		   return Convert::ToString(lista[n].numero) + "," + gcnew String(lista[n].nombre.data()) + ", " + Convert::ToString(lista[n].gen) + Environment::NewLine + mostrar(lista, (n + 1));
+	   }
+private: System::Void pictureBox8_Click(System::Object^ sender, System::EventArgs^ e) 
+{
+	ordenamiento.selectionSortNum(pokedex, 80);
+	textBox1->Text = mostrar(pokedex, 0);
 }
 };
 }
