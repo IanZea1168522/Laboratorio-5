@@ -1,5 +1,12 @@
 #pragma once
-
+#include "Pokemon.h"
+#include <vector>
+#include <fstream>
+#include <sstream>
+#include <iostream>
+#include <string>
+#include <string.h>
+#include <msclr/marshal_cppstd.h>
 namespace Laboratoio5 {
 
 	using namespace System;
@@ -8,6 +15,9 @@ namespace Laboratoio5 {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+
+	//variables globales a utilizar
+	pokemon pokedex[80];
 
 	/// <summary>
 	/// Resumen de MyForm
@@ -136,6 +146,7 @@ namespace Laboratoio5 {
 			this->pictureBox3->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox3->TabIndex = 4;
 			this->pictureBox3->TabStop = false;
+			this->pictureBox3->Click += gcnew System::EventHandler(this, &MyForm::pictureBox3_Click);
 			// 
 			// pictureBox4
 			// 
@@ -217,6 +228,7 @@ namespace Laboratoio5 {
 			this->Controls->Add(this->pictureBox1);
 			this->Name = L"MyForm";
 			this->Text = L"Pokédex";
+			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->EndInit();
@@ -234,5 +246,50 @@ namespace Laboratoio5 {
 	{
 		textBox1->Text = "Bievenido al prototipo del nuevo pokédex" + Environment::NewLine + "En este prototipo podrás ingresar o modificar el archivo de texto ya existente, para mostrar y ordenar tus pokémon favoritos" + Environment::NewLine + "Primero debes modificar o reemplazar el archivo de texto Texto.txt con una lista de un pokemon por renglón, escrito con el formato de número, nombre, generación. Ejemplo: " + Environment::NewLine + "143, Snorlax, 1" + Environment::NewLine + "Si aún no haz ingresado tu propia lista puedes ordenar una lista default, intenta ingresarlos de forma desordenada para ver la magia del pokédex, recuerda ingresar 10 criaturas por generación y respetar el formato (máximo 80 pokemon sin dejar lineas de por medio en blanco y separadas respectivamente con su coma y espacio)";
 	}
+private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) 
+{
+	leerArchivo();
+}
+	   void leerArchivo()
+	   {
+		   //archivo de texto de las cartas
+		   std::ifstream archivo;
+		   //texto de cada linea
+		   std::string texto;
+		   //texto en system string
+		   System::String^ txt;
+		   //linea actual que se está leyendo
+		   int lineaActual = 0;
+		   int num;
+		   System::String^ nombre;
+		   int gen;
+		   //se abre el archivo de las cartas
+		   archivo.open("Texto.txt", std::ios::in);
+		   //se verifica si hay errores
+		   if (archivo.fail())
+		   {
+			   MessageBox::Show("non pa");
+		   }
+		   //se llena el arreglo con las cartas
+		   while (!archivo.eof())
+		   {
+			   std::getline(archivo, texto);
+			   txt = gcnew String(texto.data());
+			   //variables que guarden la informacion de las lineas
+			   num = Convert::ToInt32(txt->Split(',')[0]);
+			   nombre = txt->Split(',')[1];
+			   gen = Convert::ToInt32(txt->Split(',')[2]);
+			   //se asignan los valores al arreglo
+			   pokedex[lineaActual].numero = num;
+			   pokedex[lineaActual].nombre = msclr::interop::marshal_as<std::string>(nombre);
+			   pokedex[lineaActual].gen = gen;
+			   lineaActual++;
+		   }
+		   //se cierra el archivo
+		   archivo.close();
+	   }
+private: System::Void pictureBox3_Click(System::Object^ sender, System::EventArgs^ e) 
+{
+}
 };
 }
