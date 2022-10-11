@@ -1,0 +1,4 @@
+C:\Users\izeac\Desktop\Repos tareas\Laboratoio 5\Laboratoio 5\x64\Debug\Laboratoio 5.vcxproj.AssemblyReference.cache
+C:\Users\izeac\Desktop\Repos tareas\Laboratoio 5\Laboratoio 5\x64\Debug\Laboratoio 5.vcxproj.SuggestedBindingRedirects.cache
+C:\Users\izeac\Desktop\Repos tareas\Laboratoio 5\Laboratoio 5\x64\Debug\Laboratoio5.MyForm.resources
+C:\Users\izeac\Desktop\Repos tareas\Laboratoio 5\Laboratoio 5\x64\Debug\Laboratoio 5.vcxproj.GenerateResource.cache
