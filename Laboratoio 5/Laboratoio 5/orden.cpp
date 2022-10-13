@@ -47,3 +47,64 @@ void orden::selectionSortNum(pokemon lista[], int n)
 		swap(&lista[indice], &lista[i]);
 	}
 };
+//método shellSort para las generaciones
+void orden::shellSortGen(pokemon lista[], int n)
+{
+	int i, j, k, intervalo;
+	intervalo = n / 2;
+	pokemon temp;
+	while (intervalo > 0)
+	{
+		for (i = intervalo; i <= n; i++)
+		{
+			j = i - intervalo;
+			while (j >= 0)
+			{
+				k = j + intervalo;
+				if (lista[j].gen <= lista[k].gen)
+				{
+					j = -1;
+				}
+				else
+				{
+					temp = lista[j];
+					lista[j] = lista[k];
+					lista[k] = temp;
+					j -= intervalo;
+				}
+			}
+		}
+		intervalo = intervalo / 2;
+	}
+};
+//método shell sort para el número nacional
+void orden::shellSortNum(pokemon lista[], int n)
+{
+	int i, j, k, intervalo;
+	intervalo = n / 2;
+	pokemon temp;
+	while (intervalo > 0)
+	{
+		for (i = intervalo; i <= n; i++)
+		{
+			j = i - intervalo;
+			while (j >= 0)
+			{
+				k = j + intervalo;
+				if (lista[j].numero <= lista[k].numero)
+				{
+					j = -1;
+				}
+				else
+				{
+					temp = lista[j];
+					lista[j] = lista[k];
+					lista[k] = temp;
+					j -= intervalo;
+				}
+			}
+		}
+		intervalo = intervalo / 2;
+	}
+};
+//metodo para dividir

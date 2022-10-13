@@ -57,6 +57,8 @@ namespace Laboratoio5 {
 	private: System::Windows::Forms::PictureBox^ pictureBox7;
 	private: System::Windows::Forms::PictureBox^ pictureBox8;
 	private: System::Windows::Forms::Label^ label2;
+
+
 	protected:
 
 	private:
@@ -159,6 +161,7 @@ namespace Laboratoio5 {
 			this->pictureBox4->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox4->TabIndex = 5;
 			this->pictureBox4->TabStop = false;
+			this->pictureBox4->Click += gcnew System::EventHandler(this, &MyForm::pictureBox4_Click);
 			// 
 			// pictureBox5
 			// 
@@ -169,21 +172,23 @@ namespace Laboratoio5 {
 			this->pictureBox5->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox5->TabIndex = 6;
 			this->pictureBox5->TabStop = false;
+			this->pictureBox5->Click += gcnew System::EventHandler(this, &MyForm::pictureBox5_Click);
 			// 
 			// pictureBox6
 			// 
 			this->pictureBox6->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox6.Image")));
-			this->pictureBox6->Location = System::Drawing::Point(704, 628);
+			this->pictureBox6->Location = System::Drawing::Point(704, 655);
 			this->pictureBox6->Name = L"pictureBox6";
 			this->pictureBox6->Size = System::Drawing::Size(120, 75);
 			this->pictureBox6->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox6->TabIndex = 10;
 			this->pictureBox6->TabStop = false;
+			this->pictureBox6->Click += gcnew System::EventHandler(this, &MyForm::pictureBox6_Click);
 			// 
 			// pictureBox7
 			// 
 			this->pictureBox7->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox7.Image")));
-			this->pictureBox7->Location = System::Drawing::Point(578, 628);
+			this->pictureBox7->Location = System::Drawing::Point(578, 655);
 			this->pictureBox7->Name = L"pictureBox7";
 			this->pictureBox7->Size = System::Drawing::Size(120, 75);
 			this->pictureBox7->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
@@ -193,7 +198,7 @@ namespace Laboratoio5 {
 			// pictureBox8
 			// 
 			this->pictureBox8->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox8.Image")));
-			this->pictureBox8->Location = System::Drawing::Point(452, 628);
+			this->pictureBox8->Location = System::Drawing::Point(452, 655);
 			this->pictureBox8->Name = L"pictureBox8";
 			this->pictureBox8->Size = System::Drawing::Size(120, 75);
 			this->pictureBox8->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
@@ -206,7 +211,7 @@ namespace Laboratoio5 {
 			this->label2->AutoSize = true;
 			this->label2->Font = (gcnew System::Drawing::Font(L"Orbitron", 8.999999F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label2->Location = System::Drawing::Point(542, 607);
+			this->label2->Location = System::Drawing::Point(551, 634);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(178, 18);
 			this->label2->TabIndex = 7;
@@ -301,7 +306,7 @@ private: System::Void pictureBox3_Click(System::Object^ sender, System::EventArg
 	   System::String^ mostrar(pokemon lista[], int n)
 	   {
 		   //condicion de salida
-		   if (n == 79)
+		   if (n == 79 || lista[n + 1].gen == NULL)
 		   {
 			   return Convert::ToString(lista[n].numero) + "," + gcnew String(lista[n].nombre.data()) + ", " + Convert::ToString(lista[n].gen);
 		   }
@@ -310,6 +315,24 @@ private: System::Void pictureBox3_Click(System::Object^ sender, System::EventArg
 private: System::Void pictureBox8_Click(System::Object^ sender, System::EventArgs^ e) 
 {
 	ordenamiento.selectionSortNum(pokedex, 80);
+	textBox1->Text = mostrar(pokedex, 0);
+}
+private: System::Void pictureBox9_Click(System::Object^ sender, System::EventArgs^ e) 
+{
+}
+private: System::Void pictureBox4_Click(System::Object^ sender, System::EventArgs^ e) 
+{
+	// ordenamiento.quikSortGen(pokedex, 0, 79);
+	//textBox1->Text = mostrar(pokedex, 0);
+}
+private: System::Void pictureBox5_Click(System::Object^ sender, System::EventArgs^ e) 
+{
+	ordenamiento.shellSortGen(pokedex, 79);
+	textBox1->Text = mostrar(pokedex, 0);
+}
+private: System::Void pictureBox6_Click(System::Object^ sender, System::EventArgs^ e) 
+{
+	ordenamiento.shellSortNum(pokedex, 79);
 	textBox1->Text = mostrar(pokedex, 0);
 }
 };
