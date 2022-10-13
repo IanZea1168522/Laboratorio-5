@@ -11,12 +11,16 @@ public:
 	//selection sort entre el número
 	void selectionSortNum(pokemon lista[], int n);
 	//quik sort para las generaciones
-	void quikSortGen(pokemon* lista[], int start, int end);
+	void quikSortGen(pokemon lista[], int start, int end);
 	//metodo para ir dividiendo el arreglo
-	int divideGen(pokemon* lista[], int start, int end);
+	int divideGen(pokemon lista[], int start, int end);
 	//método shell para las generaciones
 	void shellSortGen(pokemon lista[], int n);
 	//método shell para el número
 	void shellSortNum(pokemon lista[], int n);
+	//quik sort para los numeros nacionales
+	void quikSortNum(pokemon lista[], int start, int end);
+	//metodo para ir dividiendo el arreglo
+	int divideNum(pokemon lista[], int start, int end);
 };
 

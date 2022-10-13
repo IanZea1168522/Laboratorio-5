@@ -194,6 +194,7 @@ namespace Laboratoio5 {
 			this->pictureBox7->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox7->TabIndex = 9;
 			this->pictureBox7->TabStop = false;
+			this->pictureBox7->Click += gcnew System::EventHandler(this, &MyForm::pictureBox7_Click);
 			// 
 			// pictureBox8
 			// 
@@ -322,8 +323,8 @@ private: System::Void pictureBox9_Click(System::Object^ sender, System::EventArg
 }
 private: System::Void pictureBox4_Click(System::Object^ sender, System::EventArgs^ e) 
 {
-	// ordenamiento.quikSortGen(pokedex, 0, 79);
-	//textBox1->Text = mostrar(pokedex, 0);
+	ordenamiento.quikSortGen(pokedex, 0, 79);
+	textBox1->Text = mostrar(pokedex, 0);
 }
 private: System::Void pictureBox5_Click(System::Object^ sender, System::EventArgs^ e) 
 {
@@ -333,6 +334,11 @@ private: System::Void pictureBox5_Click(System::Object^ sender, System::EventArg
 private: System::Void pictureBox6_Click(System::Object^ sender, System::EventArgs^ e) 
 {
 	ordenamiento.shellSortNum(pokedex, 79);
+	textBox1->Text = mostrar(pokedex, 0);
+}
+private: System::Void pictureBox7_Click(System::Object^ sender, System::EventArgs^ e) 
+{
+	ordenamiento.quikSortNum(pokedex, 0, 79);
 	textBox1->Text = mostrar(pokedex, 0);
 }
 };

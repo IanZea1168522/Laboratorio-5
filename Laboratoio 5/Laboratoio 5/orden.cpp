@@ -108,3 +108,95 @@ void orden::shellSortNum(pokemon lista[], int n)
 	}
 };
 //metodo para dividir
+int orden::divideGen(pokemon lista[], int start, int end)
+{
+	int left, right, pivot;
+	pokemon temp;
+	pivot = lista[start].gen;
+	left = start;
+	right = end;
+	//mientras no se crucen los indices
+	while (left < right)
+	{
+		while (lista[right].gen > pivot)
+		{
+			right--;
+		}
+		while ((left < right) && (lista[left].gen <= pivot))
+		{
+			left++;
+		}
+		//si todavia no se cruzan los indices, seguimos intercambiando
+		if (left < right)
+		{
+			temp = lista[left];
+			lista[left] = lista[right];
+			lista[right] = temp;
+		}
+	}
+	//los indices ya se han cruzado, ponemos el pivot en el lugar correspondiente
+	temp = lista[right];
+	lista[right] = lista[start];
+	lista[start] = temp;
+
+	//la nueva posición del pivot
+	return right;
+};
+void orden::quikSortGen(pokemon lista[], int start, int end)
+{
+	int pivot;
+	if (start < end)
+	{
+		pivot = divideGen(lista, start, end);
+		//ordeno la lista de menores
+		orden::quikSortGen(lista, start, pivot - 1);
+		//ordeno la lista de mayores
+		orden::quikSortGen(lista, pivot + 1, end);
+	}
+};
+void orden::quikSortNum(pokemon lista[], int start, int end)
+{
+	int pivot;
+	if (start < end)
+	{
+		pivot = divideNum(lista, start, end);
+		//ordeno la lista de menores
+		orden::quikSortNum(lista, start, pivot - 1);
+		//ordeno la lista de mayores
+		orden::quikSortNum(lista, pivot + 1, end);
+	}
+};
+int orden::divideNum(pokemon lista[], int start, int end)
+{
+	int left, right, pivot;
+	pokemon temp;
+	pivot = lista[start].numero;
+	left = start;
+	right = end;
+	//mientras no se crucen los indices
+	while (left < right)
+	{
+		while (lista[right].numero > pivot)
+		{
+			right--;
+		}
+		while ((left < right) && (lista[left].numero <= pivot))
+		{
+			left++;
+		}
+		//si todavia no se cruzan los indices, seguimos intercambiando
+		if (left < right)
+		{
+			temp = lista[left];
+			lista[left] = lista[right];
+			lista[right] = temp;
+		}
+	}
+	//los indices ya se han cruzado, ponemos el pivot en el lugar correspondiente
+	temp = lista[right];
+	lista[right] = lista[start];
+	lista[start] = temp;
+
+	//la nueva posición del pivot
+	return right;
+};
